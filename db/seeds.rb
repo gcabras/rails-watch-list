@@ -5,3 +5,25 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# Be sure to clean the db when seeding
+
+require 'open-uri'
+require 'json'
+
+mdb_url = 'https://api.themoviedb.org/3/movie/top_rated?api_key=64f784046b4a3bcc1414ee6a894812ea&language=en-US&page=1'
+
+movies_doc = URI.open(mdb_url).read
+
+Movie.destroy_all
+
+movies = JSON.parse(movies_doc)['results']
+
+movies.each do |movie|
+  Movie.create!(
+    title: movie['original_title'],
+    overview: movie['overview'],
+    poster_url: movie['poster_path'],
+    rating: movie['vote_average']
+  )
+end
