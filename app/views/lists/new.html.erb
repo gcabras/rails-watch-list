@@ -1,5 +1,10 @@
-<h1>Create your new list</h1>
-<%=simple_form_for(@list) do |f|%>
-<%=f.input :name%>
-<%=f.submit%>
-<%end%>
+<div class="container mt-3 d-flex flex-column align-items-center">
+  <h1>Create your new list</h1>
+  <div class="form-new">
+    <%=simple_form_for(@list) do |f|%>
+    <%=f.input :name%>
+    <%=f.input :image_url%>
+    <%=f.submit class:"btn btn-info"%>
+    <%end%>
+  </div>
+</div>
