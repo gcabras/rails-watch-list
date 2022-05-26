@@ -13,19 +13,17 @@
         <div class="card-movie">
           <img src=<%=bookmark.movie.poster_url%>>
           <div class="card-movie-sub">
-            <h1><%=bookmark.movie.title%></h1>
-            <%=link_to "Delete",
-                      bookmark_destroy_path(bookmark.id),
-                      class: "btn btn-outline-danger",
-                      method: :delete,
-                      data: { confirm: "Are you sure you want to delete the bookmark?"} %>
+            <h2><%=bookmark.movie.title%> - Rating: <%=bookmark.movie.rating%></h2>
           </div>
           <div class="card-movie-infos">
-            <div>
-               <h2 class="card-movie-rating">Rating: <%=bookmark.movie.rating%></h2>
-               <h3></h3>
-              <p><%=bookmark.movie.overview%></p>
-            </div>
+            <p><%=bookmark.movie.overview%></p>
+          </div>
+          <div class="card-button">
+              <%=link_to "Delete",
+                  bookmark_destroy_path(bookmark.id),
+                  class: "btn btn-outline-danger",
+                  method: :delete,
+                  data: { confirm: "Are you sure you want to delete the bookmark?"} %>
           </div>
         </div>
     <%end%>
