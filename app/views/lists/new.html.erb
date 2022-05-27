@@ -3,7 +3,7 @@
   <div class="form-new">
     <%=simple_form_for(@list) do |f|%>
     <%=f.input :name%>
-    <%=f.input :image_url%>
+    <%=f.input :photo, as: :file%>
     <%=f.submit class:"btn btn-info"%>
     <%end%>
   </div>
