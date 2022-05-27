@@ -1,7 +1,7 @@
 <div class="banner" id="banner-homepage">
   <div class="container d-flex flex-column">
     <h1>Welcome to Watch List</h1>
-    <p>Gorgeous lists for your favourite movies</p>
+    <p>Sort your movies in gorgeous lists</p>
     <div class="button d-flex flex-column align-items-center">
       <%=link_to "Create a List", new_list_path, class: "btn btn-info"%>
     </div>
@@ -12,7 +12,7 @@
 <h1 class="text-center">Your Lists</h1>
   <div class="cards-grid">
     <%@lists.each do |list|%>
-      <div class="card-list" style="url('<%= cl_image_path list.photo.key, height: 300, crop: :fill %>')">
+      <div class="card-list" style="background-image: url(<%=list.image_url%>)">
         <%=link_to list.name, list_path(list)%>
       </div>
     <%end%>
