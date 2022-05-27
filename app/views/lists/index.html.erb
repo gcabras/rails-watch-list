@@ -12,7 +12,7 @@
 <h1 class="text-center">Your Lists</h1>
   <div class="cards-grid">
     <%@lists.each do |list|%>
-      <div class="card-list" style="background-image:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url('<%= cl_image_path list.photo.key, height: 300, crop: :fill %>')">
+      <div class="card-list" style="url('<%= cl_image_path list.photo.key, height: 300, crop: :fill %>')">
         <%=link_to list.name, list_path(list)%>
       </div>
     <%end%>
