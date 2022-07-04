@@ -8,6 +8,7 @@ class BookmarksController < ApplicationController
     @bookmark = Bookmark.create(bookmarks_params)
     @list = List.find(params[:list_id])
     @movie = Movie.find(bookmarks_params[:movie_id])
+    @bookmark.user = current_user
     @bookmark.list = @list
     @bookmark.movie = @movie
     @bookmark.save

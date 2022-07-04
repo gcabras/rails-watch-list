@@ -11,24 +11,7 @@
   </head>
 
   <body>
-  <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid">
-    <a class="navbar-brand">
-      <%=image_tag "Popcorn_Time_logo.png", alt:"my_logo", width: 40%>
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
-          <li class="nav-item active">
-            <%=link_to "Homepage", root_path, class:"nav-link btn btn-light"%>
-          </li>
-      </ul>
-    </div>
-  </div>
-</div>
+    <%= render "shared/navbar" %>
     <%= yield %>
   </body>
 </html>

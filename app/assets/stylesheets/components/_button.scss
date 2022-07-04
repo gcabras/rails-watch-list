@@ -1,0 +1,14 @@
+.main-button {
+  text-decoration: none;
+  padding: 5px;
+  color: $font-color-main;
+  background-color: $font-red;
+  border-radius: 5px;
+  font-size: large;
+}
+
+.main-button:hover {
+  text-decoration: none;
+  color: $font-color-main;
+  background-color: rgb(192, 11, 11);
+}

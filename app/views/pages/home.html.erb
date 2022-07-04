@@ -1,0 +1,22 @@
+<div class="container mb-3">
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-6">
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-6 order-md-last">
+      <div class="container-welcome">
+        <div class="big-title-div">
+          <h1 id="big-title"><span class="red-char">W</span>atch<span class="red-char">S</span>hack<span class="red-char">.</span></h1>
+        </div>
+        <% if user_signed_in? %>
+        <div class="user-actions">
+          <%= link_to raw('Find Inspiration  <i class="fas fa-lightbulb"></i>'), lists_path, class: "main-button", id:"home-button"%>
+          <p class="m-3">Or</p>
+          <%= link_to raw('Create a list  <i class="fas fa-clipboard-list"></i>'), new_list_path, class: "main-button", id:"home-button"%>
+        </div>
+        <% else %>
+          <%= link_to raw('Sign in to Start  <i class="fas fa-film"></i>'), new_user_session_path, class: "main-button", id:"home-button"%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

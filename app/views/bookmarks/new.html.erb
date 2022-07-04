@@ -1,10 +1,10 @@
 <div class="container mt-3 d-flex flex-column align-items-center">
 <h1>Add a film to <%=@list.name%></h1>
-<div class="form-new">
-<%=simple_form_for([@list, @bookmark]) do |f|%>
-  <%=f.input :comment%>
-  <%= f.association :movie %>
-  <%= f.submit class:"btn btn-info"%>
-<%end%>
-</div>
+  <div class="form-new">
+  <%=simple_form_for([@list, @bookmark]) do |f|%>
+    <%=f.input :comment%>
+    <%= f.association :movie, input_html: { data: { controller: "select2" } }%>
+    <%= f.submit class:"btn btn-info"%>
+  <%end%>
+  </div>
 </div>

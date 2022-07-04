@@ -1,31 +1,35 @@
-<div class="banner" style="background-image:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url('<%= cl_image_path @list.photo.key, height: 300, crop: :fill %>')">
-  <div class="container d-flex flex-column">
-    <h1><%=@list.name%></h1>
-    <div class="button d-flex flex-column align-items-center mt-3">
-      <%=link_to "Add a Movie", new_list_bookmark_path(@list), class: "btn btn-info"%>
+<div class="body-container" style="background-image:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url('<%= cl_image_path @list.photo.key, height: 300, crop: :fill %>'); width: 100%;
+height: 700px; background-size: cover;  background-repeat: no-repeat;">
+  <div class="container mb-3">
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-6">
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-6 order-md-last">
+      <div class="container-list">
+        <div class="big-title-div">
+          <h1 id="list-title"><%= @list.name %></h1>
+        </div>
+          <div class="container-grid">
+            <div class="cards-grid">
+              <% @list.movies.each do |movie| %>
+                  <div class="flip-card">
+                    <div class="flip-card-inner">
+                      <div class="flip-card-front" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= movie.poster_url %>')">
+                        <h4 id="title-film-card"><%=movie.title%></h4>
+                      </div>
+                      <div class="flip-card-back">
+                        <p>
+                         <%=movie.overview%>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+              <% end %>
+            </div>
+          </div>
+          <%= link_to raw('Add Films <i class="fas fa-film"></i>'), new_list_bookmark_path(@list), class: "main-button", id:"home-button"%>
+      </div>
     </div>
   </div>
 </div>
-
-<div class="container mt-5">
-  <div class="card-grid-movie">
-    <%@list.bookmarks.each do |bookmark|%>
-        <div class="card-movie">
-          <img src=<%=bookmark.movie.poster_url%>>
-          <div class="card-movie-sub">
-            <h2><%=bookmark.movie.title%> - Rating: <%=bookmark.movie.rating%></h2>
-          </div>
-          <div class="card-movie-infos">
-            <p><%=bookmark.movie.overview%></p>
-          </div>
-          <div class="card-button">
-              <%=link_to "Delete",
-                  bookmark_destroy_path(bookmark.id),
-                  class: "btn btn-outline-danger",
-                  method: :delete,
-                  data: { confirm: "Are you sure you want to delete the bookmark?"} %>
-          </div>
-        </div>
-    <%end%>
-  </div>
 </div>

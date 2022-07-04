@@ -4,6 +4,9 @@ class Movie < ApplicationRecord
   has_many :bookmarks
   before_destroy :check_for_bookmark
 
+  belongs_to :director
+  has_many :actors
+
   private
 
   def check_for_bookmark

@@ -9,3 +9,15 @@
   background: rgb(42, 41, 41);
   color: white;
 }
+
+.form-div {
+  margin-top: 0;
+  text-align: center;
+}
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  align-items: center;
+}
