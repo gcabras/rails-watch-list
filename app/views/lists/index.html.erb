@@ -1,20 +1,28 @@
-<div class="banner" id="banner-homepage">
-  <div class="container d-flex flex-column">
-    <h1>Welcome to Watch List</h1>
-    <p>Sort your movies in gorgeous lists</p>
-    <div class="button d-flex flex-column align-items-center">
-      <%=link_to "Create a List", new_list_path, class: "btn btn-info"%>
-    </div>
-  </div>
-</div>
 
 <div class="container mt-3">
-<h1 class="text-center">Your Lists</h1>
+<h1 id="big-title" class="text-center"><span class="red-char">WS</span> Lists<span class="red-char">.</span></h1>
+  <div class="cards-container">
   <div class="cards-grid">
-    <%@lists.each do |list|%>
-      <div class="card-list" style="background-image: url('<%= cl_image_path list.photo.key, height: 300, crop: :fill %>')">
-        <%=link_to list.name, list_path(list)%>
-      </div>
-    <%end%>
+    <% @lists.each do |list| %>
+      <%= link_to list_path(list) do %>
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path list.photo.key %>')">
+              <h2 id="card-title"><%=list.name%></h2>
+            </div>
+            <div class="flip-card-back">
+              <p>
+                <ul>
+                  <% list.movies.each do |movie|%>
+                    <li><%=movie.title%></li>
+                  <% end %>
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
   </div>
+</div>
 </div>

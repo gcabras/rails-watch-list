@@ -1,0 +1,10 @@
+<div class="container mt-3">
+<h1 class="text-center">Your Lists</h1>
+  <div class="cards-grid">
+    <%@userlists.each do |list|%>
+      <div class="card-list" style="background-image: url('<%= cl_image_path list.photo.key, height: 300, crop: :fill %>')">
+        <%=link_to list.name, list_path(list)%>
+      </div>
+    <%end%>
+  </div>
+</div>

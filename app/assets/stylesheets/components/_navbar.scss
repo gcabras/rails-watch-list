@@ -1,12 +1,22 @@
-.navbar-lewagon {
+.navbar-watchlist {
   justify-content: space-between;
-  background: rgb(42, 41, 41);
+  background: black;
+  color: $font-red;
 }
 
-.navbar-lewagon .navbar-collapse {
+.navbar-mybrand {
+  color: $font-red;
+}
+
+.nav-mylink {
+  color: $font-color-main;
+  margin: 5px;
+}
+
+.navbar-watchlist .navbar-collapse {
   flex-grow: 0;
 }
 
-.navbar-lewagon .navbar-brand img {
+.navbar-watchlist .navbar-brand img {
   width: 40px;
 }
