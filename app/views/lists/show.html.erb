@@ -1,22 +1,24 @@
 <div class="body-container">
   <div class="container mb-3">
   <div class="row">
-    <div class="col-sm-12 col-md-6 col-lg-6">
+    <div class="col-sm-12 col-md-12 col-lg-6">
       <div class="film-info">
         <% if @list.movies.empty? %>
-          <h2> Add your first film </h2>
+        <div class="beginning">
+          <h1> Add your first film </h1>
           <div data-controller="addfilm" class="container-addfilm">
             <div data-addfilm-target="form" class="form-add d-none">
                 <%=render "bookmarks/new"%>
             </div>
               <button type="button"  class="main-button" id="home-button" data-action="click->addfilm#show">Add Films <i class="fas fa-film"></i></button>
           </div>
+          </div>
         <% else %>
           <%= render "moviecard", list: @list %>
           <% end %>
       </div>
     </div>
-    <div class="col-sm-12 col-md-6 col-lg-6 order-md-last">
+    <div class="col-sm-12 col-md-12 col-lg-6 order-md-last">
       <div class="container-list">
         <div class="big-title-div">
           <h1 id="list-title"><%= @list.name %></h1>
@@ -25,18 +27,7 @@
           <div class="container-grid">
             <div class="cards-grid">
               <% @list.movies.each do |movie| %>
-                  <div class="flip-card">
-                    <div class="flip-card-inner">
-                      <div class="flip-card-front" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= movie.poster_url %>')">
-                        <h4 id="title-film-card"><%=movie.title%></h4>
-                      </div>
-                      <div class="flip-card-back">
-                        <p>
-                         <%=movie.overview%>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                <%= render "movielist", movie: movie %>
               <% end %>
             </div>
           </div>
