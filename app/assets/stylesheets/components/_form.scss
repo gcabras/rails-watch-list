@@ -1,23 +1,19 @@
 .form-new {
   display: flex;
+  flex-direction: column;
   text-align: center;
   align-items: center;
   margin-top: 10px;
-  border: 3px solid rgb(255, 208, 0);
-  border-radius: 10px;
-  padding: 25px;
-  background: rgb(42, 41, 41);
+  background: transparent;
   color: white;
-}
-
-.form-div {
-  margin-top: 0;
-  text-align: center;
 }
 
 .form-input {
   display: flex;
-  flex-direction: column;
-  color: white;
-  align-items: center;
+  justify-content: center;
+}
+
+.form-add-container {
+  margin-bottom: 16px;
+  width: 100%
 }
