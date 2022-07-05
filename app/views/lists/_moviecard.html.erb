@@ -1,0 +1,26 @@
+<div class="movie_card" id="bright">
+  <div class="info_section">
+    <div class="movie_header">
+      <img class="locandina" src=<%= list.movies.first.poster_url %>/>
+      <h1><%=list.movies.first.title%></h1>
+      <h4><%=list.movies.first.year%>, <%=list.movies.first.director.name%></h4>
+      <span class="rating"><%=list.movies.first.rating%><i class="fa-solid fa-star"></i><span id="logo"><i class="fa-brands fa-imdb"></i></span></span>
+    </div>
+    <div class="movie_desc">
+      <div class="text">
+       <p><%=list.movies.first.overview%></p>
+      </div>
+      <div class="media">
+        <ul id="media-ul">
+        <%unless list.movies.first.streaming.nil? %>
+          <li id="media-ul-elements"><a href=<%=list.movies.first.streaming%> target=”_blank”>Watch it <i class="fa-solid fa-couch"></i></a></li>
+        <%end%>
+        <%unless list.movies.first.trailer.nil?%>
+          <li id="media-ul-elements"><a href=<%=list.movies.first.trailer%> target=”_blank”>Trailer <i class="fa-solid fa-video"></i></a></li>
+        <%end%>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="blur_back bright_back" style="background-image: url('<%= list.movies.first.imageone%>');"></div>
+</div>

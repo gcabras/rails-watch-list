@@ -26,9 +26,9 @@ export default class extends Controller {
     $(this.element).select2({
       closeOnSelect: false,
       placeholder: "Select an event from our Database",
-      minimumInputLength: 3,
       selectOnClose: true,
       allowClear: true,
+      maximumSelectionLength: 2,
       matcher: matchEvent
     })
   }

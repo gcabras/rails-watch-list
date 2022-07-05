@@ -1,13 +1,26 @@
-<div class="body-container" style="background-image:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url('<%= cl_image_path @list.photo.key, height: 300, crop: :fill %>'); width: 100%;
-height: 700px; background-size: cover;  background-repeat: no-repeat;">
+<div class="body-container">
   <div class="container mb-3">
   <div class="row">
     <div class="col-sm-12 col-md-6 col-lg-6">
+      <div class="film-info">
+        <% if @list.movies.empty? %>
+          <h2> Add your first film </h2>
+          <div data-controller="addfilm" class="container-addfilm">
+            <div data-addfilm-target="form" class="form-add d-none">
+                <%=render "bookmarks/new"%>
+            </div>
+              <button type="button"  class="main-button" id="home-button" data-action="click->addfilm#show">Add Films <i class="fas fa-film"></i></button>
+          </div>
+        <% else %>
+          <%= render "moviecard", list: @list %>
+          <% end %>
+      </div>
     </div>
     <div class="col-sm-12 col-md-6 col-lg-6 order-md-last">
       <div class="container-list">
         <div class="big-title-div">
           <h1 id="list-title"><%= @list.name %></h1>
+          <h3 id="subtitle"><span class="red-char"><%=@list.movies.size%></span> Film<%=@list.movies.size>1 ? "s" : ""%></h3>
         </div>
           <div class="container-grid">
             <div class="cards-grid">
@@ -27,7 +40,11 @@ height: 700px; background-size: cover;  background-repeat: no-repeat;">
               <% end %>
             </div>
           </div>
-          <%= link_to raw('Add Films <i class="fas fa-film"></i>'), new_list_bookmark_path(@list), class: "main-button", id:"home-button"%>
+          <div data-controller="addfilm" class="container-addfilm">
+          <div data-addfilm-target="form" class="form-add d-none">
+              <%=render "bookmarks/new"%>
+          </div>
+            <button type="button"  class="main-button" id="home-button" data-action="click->addfilm#show">Expand list <i class="fas fa-film"></i></button>
       </div>
     </div>
   </div>

@@ -15,7 +15,7 @@ require 'json'
 api_key = 'k_71bzmhl3'
 
 url = URI("https://imdb-api.com/en/API/Top250Movies/#{api_key}")
-
+# url = URI("https://imdb-api.com/en/API/Top250TVs/#{api_key}")
 #url = URI("https://imdb-api.com/en/API/Title/#{api_key}/tt0110413")
 
 https = Net::HTTP.new(url.host, url.port)
@@ -28,11 +28,10 @@ response = https.request(request)
 
 data = JSON.parse(response.body)
 
-data["items"].sample(2).each do |item|
+data["items"].sample(20).each do |item|
   movie = Movie.new(
     title: item["title"],
     year: item["year"].to_i,
-    poster_url: item["image"],
     rating: item["imDbRating"].to_i
   )
   # add overview
@@ -43,6 +42,27 @@ data["items"].sample(2).each do |item|
   response_plot = https_plot.request(request_plot)
   data_plot = JSON.parse(response_plot.body)
   movie.overview = data_plot['plot']
+  # add poster
+  url_poster = URI("https://imdb-api.com/API/Posters/#{api_key}/#{item['id']}")
+  https_poster = Net::HTTP.new(url_poster.host, url_poster.port)
+  https_poster.use_ssl = true
+  request_poster = Net::HTTP::Get.new(url_poster)
+  response_poster = https_plot.request(request_poster)
+  data_poster = JSON.parse(response_poster.body)
+  movie.poster_url = data_poster['posters'].first['link']
+  # add images
+  url_images = URI("https://imdb-api.com/en/API/Images/#{api_key}/#{item['id']}")
+  https_images = Net::HTTP.new(url_images.host, url_images.port)
+  https_images.use_ssl = true
+  request_images = Net::HTTP::Get.new(url_images)
+  response_images = https_plot.request(request_images)
+  data_images = JSON.parse(response_images.body)
+  movie.imageone = data_images['items'][0]['image']
+  movie.imageonetitle = data_images['items'][0]['title']
+  movie.imagetwo = data_images['items'][1]['image']
+  movie.imagetwotitle = data_images['items'][1]['title']
+  movie.imagethree = data_images['items'][2]['image']
+  movie.imagethreetitle = data_images['items'][2]['title']
   # add official website
   url_ext = URI("https://imdb-api.com/en/API/ExternalSites/#{api_key}/#{item['id']}")
   https_ext = Net::HTTP.new(url_ext.host, url_ext.port)
@@ -83,4 +103,25 @@ data["items"].sample(2).each do |item|
   moviedirector.save!
   movie.director = moviedirector
   movie.save!
+  cast = Cast.new
+  cast.movie = movie
+  cast.save!
+  data_cast['actors'].each do |actor|
+    actorcast = Actor.new
+    actorcast.name = actor["name"]
+    actorcast.role = actor["asCharacter"]
+    actorcast.image = actor["image"]
+    url_actor = URI("https://imdb-api.com/en/API/Name/#{api_key}/#{actor['id']}")
+    https_actor = Net::HTTP.new(url_actor.host, url_actor.port)
+    https_actor.use_ssl = true
+    request_actor = Net::HTTP::Get.new(url_actor)
+    response_actor = https_actor.request(request_actor)
+    data_actor = JSON.parse(response_actor.body)
+    actorcast.summary = data_actor["summary"]
+    actorcast.birthdate = data_actor["birthDate"]
+    actorcast.deathdate = data_actor["deathDate"] unless data_actor['deathDate'].nil?
+    actorcast.awards = data_actor["awards"]
+    actorcast.cast = cast
+    actorcast.save!
+  end
 end

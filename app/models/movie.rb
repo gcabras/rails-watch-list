@@ -5,7 +5,8 @@ class Movie < ApplicationRecord
   before_destroy :check_for_bookmark
 
   belongs_to :director
-  has_many :actors
+  has_one :cast
+  has_many :actors, through: :cast
 
   private
 
